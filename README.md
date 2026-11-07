@@ -10,6 +10,14 @@ This repository is a reference catalogue and starter kit—not a unified scanner
 - [Tool integration method](docs/TOOL_INTEGRATION_METHOD.md) — a repeatable method for documenting and configuring each workstream.
 - [Execution and evidence standard](docs/EXECUTION_AND_EVIDENCE_STANDARD.md) — distinguishes planned, executed and validated work.
 
+## Model selection, architecture and consolidated reporting
+
+- [Model applicability matrix](docs/MODEL_APPLICABILITY_MATRIX.md) — select tools by model/application archetype, prerequisites and limitations; includes IBM ART scope guidance.
+- [Framework architecture](docs/FRAMEWORK_ARCHITECTURE.md) — logical layers, evidence flow, lifecycle, integration boundary and safety gates.
+- [Consolidated illustrative assessment report](reports/CONSOLIDATED_ILLUSTRATIVE_ASSESSMENT.html) — cross-workstream HTML example with fictional data and separate execution/finding statuses.
+
+These are reference artefacts. The architecture is conceptual, the matrix is a selection aid, and the report is not an executed assessment.
+
 ## How to use this repository
 
 1. Select an assurance area and review the tool's capability and limitations.
@@ -51,7 +59,7 @@ The tools are not interchangeable and do not cover every model or interface. Sui
 │   ├── EXECUTION_AND_EVIDENCE_STANDARD.md
 │   ├── SAFETY.md
 │   └── TOOL_INTEGRATION_METHOD.md
-├── common/result_schema.json
+├── reports/CONSOLIDATED_ILLUSTRATIVE_ASSESSMENT.html\n├── common/result_schema.json
 ├── templates/
 │   ├── TOOL_README_TEMPLATE.md
 │   ├── TEST_CASE_TEMPLATE.md
