@@ -85,6 +85,7 @@ Each tool workstream should include, as appropriate: capability overview, method
 ## Main framework technical work
 
 The main [AI Testing Framework](https://github.com/Gajanan108/AI-Testing-Framework) now also contains:
+- [Technical validation status](https://github.com/Gajanan108/AI-Testing-Framework/blob/main/docs/TECHNICAL_VALIDATION_STATUS.md) — what has been source-reviewed, what CI validates and what still requires Colab execution.
 - [IBM ART benchmark and reproducibility protocol](https://github.com/Gajanan108/AI-Testing-Framework/blob/main/docs/BENCHMARK_AND_REPRODUCIBILITY_PROTOCOL.md) for the existing MinerU and MiniLM experiments.
 - [Assessment planning/orchestration MVP](https://github.com/Gajanan108/AI-Testing-Framework/tree/main/orchestration), including a tool registry and an opt-in synthetic Presidio reference runner. Other external tools remain documented/configuration-led; this is not a unified scanner.
 
