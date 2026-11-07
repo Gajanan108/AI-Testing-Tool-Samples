@@ -81,6 +81,13 @@ The tools are not interchangeable and do not cover every model or interface. Sui
 
 Each tool workstream should include, as appropriate: capability overview, method, prerequisites, configurable inputs, example test cases, expected evidence, limitations, official references, and an illustrative report. A runnable reference script is optional and should never be confused with proof that a test was run.
 
+
+## Main framework technical work
+
+The main [AI Testing Framework](https://github.com/Gajanan108/AI-Testing-Framework) now also contains:
+- [IBM ART benchmark and reproducibility protocol](https://github.com/Gajanan108/AI-Testing-Framework/blob/main/docs/BENCHMARK_AND_REPRODUCIBILITY_PROTOCOL.md) for the existing MinerU and MiniLM experiments.
+- [Assessment planning/orchestration MVP](https://github.com/Gajanan108/AI-Testing-Framework/tree/main/orchestration), including a tool registry and an opt-in synthetic Presidio reference runner. Other external tools remain documented/configuration-led; this is not a unified scanner.
+
 ## Relationship to the main framework
 
 The main [AI Testing Framework](https://github.com/Gajanan108/AI-Testing-Framework) defines the assessment lifecycle, assurance areas, methodology, risk rating, finding taxonomy, and reporting expectations. This repository explains how selected external tools can support those workstreams. The IBM ART experiments remain in the main repository.
