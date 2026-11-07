@@ -4,6 +4,12 @@ A companion repository that **re-establishes the practical scope and capabilitie
 
 This repository is a reference catalogue and starter kit—not a unified scanner, a claim that every tool has been executed, or a claim that sample results are real. Its purpose is to help assessors understand **what can be tested, which tool can help, what needs to be configured, what evidence to collect, and how results can be reported**.
 
+## Framework coverage and integration guidance
+
+- [Tool capability matrix](docs/TOOL_CAPABILITY_MATRIX.md) — coverage, inputs and evidence across all selected tools.
+- [Tool integration method](docs/TOOL_INTEGRATION_METHOD.md) — a repeatable method for documenting and configuring each workstream.
+- [Execution and evidence standard](docs/EXECUTION_AND_EVIDENCE_STANDARD.md) — distinguishes planned, executed and validated work.
+
 ## How to use this repository
 
 1. Select an assurance area and review the tool's capability and limitations.
