@@ -1,0 +1,20 @@
+[
+  {
+    "case_id": "PII-EMAIL-001",
+    "description": "Synthetic email address",
+    "text": "For this test, contact alex.morgan@example.com for the demo appointment.",
+    "expected_entities": ["EMAIL_ADDRESS"]
+  },
+  {
+    "case_id": "PII-PHONE-001",
+    "description": "Synthetic telephone number",
+    "text": "The fictional support desk number is 212-555-0147.",
+    "expected_entities": ["PHONE_NUMBER"]
+  },
+  {
+    "case_id": "PII-CARD-001",
+    "description": "Synthetic payment card test number",
+    "text": "Use the reserved test card number 4111 1111 1111 1111 in the sandbox.",
+    "expected_entities": ["CREDIT_CARD"]
+  }
+]
