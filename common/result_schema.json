@@ -1,1 +1,117 @@
-Starter content is being staged. See the downloadable starter archive for the complete reference version.
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/ai-testing-tool-samples/result_schema.json",
+  "title": "AI Tool Test Result",
+  "type": "object",
+  "required": [
+    "test_id",
+    "tool",
+    "tool_version",
+    "execution_status",
+    "finding_status",
+    "timestamp_utc"
+  ],
+  "properties": {
+    "test_id": {
+      "type": "string"
+    },
+    "tool": {
+      "type": "string"
+    },
+    "tool_version": {
+      "type": "string"
+    },
+    "model_or_system": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "model_or_system_version": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "dataset_or_fixture": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "execution_status": {
+      "enum": [
+        "PLANNED",
+        "NOT_APPLICABLE",
+        "SKIPPED",
+        "ATTEMPTED",
+        "EXECUTED",
+        "FAILED"
+      ]
+    },
+    "finding_status": {
+      "enum": [
+        "NONE",
+        "OBSERVATION",
+        "POTENTIAL",
+        "CONFIRMED",
+        "FALSE_POSITIVE",
+        "NOT_A_FINDING"
+      ]
+    },
+    "category": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "severity": {
+      "enum": [
+        "INFORMATIONAL",
+        "LOW",
+        "MEDIUM",
+        "HIGH",
+        "CRITICAL",
+        "UNASSESSED"
+      ]
+    },
+    "risky_behavior": {
+      "type": [
+        "boolean",
+        "null"
+      ]
+    },
+    "owasp_mapping": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "summary": {
+      "type": "string"
+    },
+    "evidence": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "limitations": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "exception": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "timestamp_utc": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "additionalProperties": false
+}
