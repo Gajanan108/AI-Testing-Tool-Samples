@@ -12,6 +12,7 @@ import html
 import json
 import logging
 import sys
+import time
 from datetime import datetime, timezone
 from importlib.metadata import PackageNotFoundError, version
 from pathlib import Path
@@ -213,7 +214,9 @@ def main() -> int:
     logger.setLevel(logging.INFO)
     logger.handlers.clear()
     handler = logging.FileHandler(log_path, mode="w", encoding="utf-8")
-    handler.setFormatter(logging.Formatter("%(asctime)sZ %(levelname)s %(message)s"))
+    formatter = logging.Formatter("%(asctime)sZ %(levelname)s %(message)s")
+    formatter.converter = time.gmtime
+    handler.setFormatter(formatter)
     logger.addHandler(handler)
 
     timestamp = utc_now()
@@ -236,7 +239,6 @@ def main() -> int:
             results = analyzer.analyze(
                 text=fixture["text"],
                 language="en",
-                entities=expected or None,
             )
             detected = sorted({result.entity_type for result in results})
             missed = sorted(set(expected) - set(detected))
