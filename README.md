@@ -79,9 +79,9 @@ The main [AI Testing Framework](https://github.com/Gajanan108/AI-Testing-Framewo
 
 ## Status and evidence discipline
 
-- Tool catalogue and starter structure: documented.
-- Presidio: reference method, configuration example, optional script and illustrative report.
-- Other tools: workstreams are planned for incremental documentation.
+- Tool catalogue, capability matrix and integration guidance: documented.
+- Presidio: reference method, configuration example, optional script, synthetic fixtures and illustrative report.
+- Other 11 tool workstreams: method guides and illustrative HTML reports are documented.
 - No actual assessment execution or tool result is claimed by the presence of sample files.
 
 Keep **execution status** separate from **finding status**. A planned or illustrative test is not an executed test; a tool observation is not automatically a confirmed vulnerability.
