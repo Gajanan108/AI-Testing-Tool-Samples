@@ -1,80 +1,73 @@
-# Microsoft Presidio — PII detection and anonymization sample
+# Microsoft Presidio — PII detection and anonymization
 
-This workstream demonstrates **real execution** of the official Presidio Python packages against synthetic text fixtures. It calls Presidio's `AnalyzerEngine` to detect PII and `AnonymizerEngine` to anonymize the detected spans.
+## Purpose in the framework
 
-## Scope
+Presidio supports the **privacy and sensitive-data handling** workstream. It can identify configured entities in text, return spans and confidence scores, and anonymize or replace detected values. It is useful for demonstrating PII discovery and de-identification workflows around text inputs and outputs.
 
-- Text PII detection for email addresses, phone numbers, and credit-card numbers.
-- Anonymization of spans returned by the analyzer.
-- Comparison of detected entity types against explicitly declared synthetic fixture expectations.
-- HTML report and execution log.
+Presidio is not a complete privacy assessment by itself. It does not prove that an application stores, exposes, or mishandles personal data; that conclusion requires application context and evidence.
 
-This is a reproducible starter assessment, not a certification of privacy compliance or a complete PII benchmark. A missed expected entity is classified as a **potential** privacy finding; it is not automatically promoted to a confirmed production vulnerability. Unexpected entity types are marked as fixture-level false-positive candidates. Review the source text, recognizer configuration, language, and business context before making a production risk decision.
+## What can be demonstrated
 
-## Requirements
+- Identify supported PII entity types such as email addresses, phone numbers and payment-card numbers.
+- Inspect entity type, text span and recognizer confidence.
+- Apply anonymization operators to detected spans.
+- Configure recognizers, supported languages and NLP models.
+- Add custom recognizers for domain-specific identifiers.
+- Compare detected entities with labelled synthetic fixtures to illustrate expected-versus-observed coverage.
 
-- Python 3.11 or newer (the upstream installation guide currently lists supported Python versions).
-- A virtual environment.
-- Presidio Analyzer, Presidio Anonymizer, spaCy, and the English spaCy model.
+## Method
 
-## Install
+1. Define the data boundary: user prompts, model inputs, model outputs, retrieved documents, logs, or another text surface.
+2. Select synthetic or approved test fixtures and label expected entity types.
+3. Configure Presidio's analyzer, language, NLP engine and recognizers for the target data.
+4. Run analysis and capture entity type, span and score.
+5. Apply the selected anonymization operator and inspect the transformed output.
+6. Compare results against fixture expectations; investigate missed and unexpected detections.
+7. Record limitations and decide whether any application-level risk is established.
 
-From this directory:
+## User configuration
 
-```bash
-python -m venv .venv
-# Linux/macOS
-source .venv/bin/activate
-# Windows PowerShell
-# .venv\Scripts\Activate.ps1
-
-python -m pip install --upgrade pip
-pip install -r requirements.txt
-python -m spacy download en_core_web_lg
-```
-
-## Run
-
-```bash
-python run_presidio.py
-```
-
-The script reads `sample_cases.json` and writes exactly two generated artifacts into `output/`:
-
-- `presidio_report.html`
-- `presidio_run.log`
-
-Choose another output directory with:
-
-```bash
-python run_presidio.py --output-dir ./artifacts
-```
-
-The log intentionally excludes raw fixture text and detected values. The HTML report shows anonymized text, entity types, confidence scores, fixture comparisons, execution status, and limitations.
-
-## Interpretation
-
-| Result | Meaning |
+| Configuration | What the assessor supplies |
 |---|---|
-| `EXECUTED` | Presidio analysis and anonymization completed for all fixtures. |
-| `FAILED` | The tool could not complete the run; inspect the log. |
-| `POTENTIAL` | At least one expected entity type was not detected in a synthetic fixture. |
-| `FALSE_POSITIVE` | Presidio returned an entity type not declared in the fixture's expected set. |
-| `OBSERVATION` | Detected entity types matched the fixture expectations. |
+| Input source | Text fixture, approved dataset, application adapter or controlled endpoint |
+| Language | Language supported by the configured NLP engine and recognizers |
+| Entity types | Entity classes relevant to the assessment objective |
+| Recognizers | Built-in recognizers plus optional custom patterns/context |
+| NLP model | Installed model compatible with the Presidio NLP engine |
+| Thresholds | Confidence threshold appropriate to the use case |
+| Anonymization | Operator and replacement policy for each entity type |
+| Evaluation | Expected entity labels and acceptance criteria |
 
-The report's risky-behavior field is set to true only when an expected fixture entity type is missed. This is a test signal, not proof of exploitability or production exposure. Severity remains unassessed. OWASP mapping is left empty because this standalone PII detector test does not, by itself, establish an application or LLM vulnerability.
+Use the official Presidio documentation to confirm the current API and supported configuration. The optional `run_presidio.py` file is a starter example for synthetic local fixtures; adapt it to the target architecture rather than assuming it fits every deployment.
+
+## Sample assets
+
+- `sample_cases.json`: fictional fixture examples; change or extend the text and expected entity labels.
+- `sample_report.html`: **illustrative only** report layout with fictional values. It is not generated from an actual execution.
+- `run_presidio.py`: optional reference script; its presence does not mean it has been executed or validated in your environment.
+
+## Report interpretation
+
+A missed expected entity is a test observation that may indicate a potential privacy-control weakness. An unexpected detection may be a false-positive candidate. Neither should be promoted to a confirmed finding without review of the actual data surface, application behaviour and impact.
+
+Keep the following separate:
+- Execution status: whether the configured Presidio operation actually ran.
+- Finding status: whether the observed behaviour has security significance.
+- Risky behaviour: whether the observed behaviour creates a demonstrated risk in the assessed system.
+- Severity: assigned only after impact and context are assessed.
+- OWASP mapping: include only if the broader application evidence supports a relevant mapping.
 
 ## Limitations
 
-- The fixtures are synthetic and intentionally small; they do not measure production precision or recall.
-- Entity-type matching is evaluated at the fixture level, not as a full span-level benchmark.
-- Presidio's results depend on recognizers, NLP model, language, context, and configuration.
-- A successful run does not prove that all sensitive data will be detected. Add domain-specific recognizers and representative, approved test data before relying on it operationally.
-- No network service or external API is required by this sample; the Python packages run locally.
+- Recognition depends on language, NLP model, recognizer coverage, context and configuration.
+- A detector can miss sensitive values or produce false positives.
+- A small synthetic fixture set is not a representative precision/recall benchmark.
+- Anonymization of detected spans does not guarantee complete de-identification.
+- Production deployment requires data-flow analysis, custom recognizers where appropriate, privacy review and security controls beyond the detector.
 
-## Official upstream references
+## Official references
 
-- [Presidio project](https://github.com/data-privacy-stack/presidio)
+- [Presidio upstream repository](https://github.com/microsoft/presidio)
 - [Installation guide](https://microsoft.github.io/presidio/installation/)
 - [Analyzer documentation](https://microsoft.github.io/presidio/analyzer/)
-- [Text de-identification quickstart](https://presidio.dataprivacystack.org/getting_started/getting_started_text/)
+- [Text de-identification quickstart](https://microsoft.github.io/presidio/getting_started/quickstart/)

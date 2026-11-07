@@ -1,27 +1,39 @@
 # AI Testing Tool Samples
 
-A companion repository of **small, reproducible demonstrations** for the tools referenced by the AI Security Testing Framework.
+A companion repository that **re-establishes the practical scope and capabilities** of the AI Security Testing Framework through tool-specific methods, configuration guidance, illustrative test cases, and sample reports.
 
-This repository is a collection of independent tool workstreams, not a unified scanner. Each demonstration must use the tool's official package, API, and documentation; report actual execution status; and state its limitations.
+This repository is a reference catalogue and starter kit—not a unified scanner, a claim that every tool has been executed, or a claim that sample results are real. Its purpose is to help assessors understand **what can be tested, which tool can help, what needs to be configured, what evidence to collect, and how results can be reported**.
 
-## Tool catalogue and planned workstreams
+## How to use this repository
 
-| Area | Tool | Official source | Initial demonstration |
-|---|---|---|---|
-| Privacy | Microsoft Presidio | https://github.com/microsoft/presidio | Detect and anonymise synthetic PII |
-| Fairness | AI Fairness 360 | https://github.com/Trusted-AI/AIF360 | Calculate selected fairness metrics on a documented sample dataset |
-| NLP robustness | TextAttack | https://github.com/QData/TextAttack | Run a supported text attack against a small NLP model |
-| LLM security | Garak | https://github.com/NVIDIA/garak | Run selected probes against an explicitly configured local/test endpoint |
-| Explainability | LIME | https://github.com/marcotcr/lime | Explain a prediction from a small tabular/text classifier |
-| Explainability | InterpretML | https://github.com/interpretml/interpret | Demonstrate global/local interpretability on a sample dataset |
-| Performance | Apache JMeter | https://jmeter.apache.org/ | Run a bounded load test against a local demo endpoint |
-| Performance | Locust | https://locust.io/ | Run a bounded Python user-load test against a local demo endpoint |
-| Monitoring | Evidently | https://github.com/evidentlyai/evidently | Compare reference and current synthetic data for drift |
-| AI testing | Giskard | https://github.com/Giskard-AI/giskard | Run supported tests on a small model or explicitly configured LLM app |
-| Incident response | Splunk | https://www.splunk.com/ | Provide sample event ingestion/search workflow; requires an authorised Splunk instance |
-| Incident response | Elastic Security | https://github.com/elastic/kibana | Provide sample event ingestion/detection workflow; requires an authorised Elastic instance |
+1. Select an assurance area and review the tool's capability and limitations.
+2. Read the method and configuration guidance.
+3. Adapt the sample configuration, model/system endpoint, dataset, test cases, and thresholds to an authorised assessment.
+4. Run the upstream tool in the user's own controlled environment when ready.
+5. Capture actual outputs, logs, versions, and exceptions.
+6. Convert observations into findings only after validation against the assessment threat model.
+7. Use the shared result schema and report templates for consistent evidence.
 
-Tool selection and APIs change over time. Before implementation, verify the official documentation and pin tested versions. Do not assume every tool supports every model type.
+**Sample reports are illustrative only.** Any example metrics, findings, outputs, or severities are fictional placeholders for demonstrating report structure. They must not be presented as evidence of a real assessment.
+
+## Tool catalogue and achievable coverage
+
+| Assurance area | Tool | What it can help demonstrate |
+|---|---|---|
+| Privacy | [Microsoft Presidio](https://github.com/microsoft/presidio) | PII discovery, entity recognition, anonymization and custom recognizers |
+| Fairness | [AI Fairness 360](https://github.com/Trusted-AI/AIF360) | Group fairness metrics, bias measurement and selected mitigation approaches |
+| NLP robustness | [TextAttack](https://github.com/QData/TextAttack) | Text perturbations, adversarial examples and model performance under attack |
+| LLM security | [Garak](https://github.com/NVIDIA/garak) | Probe-based assessment of selected LLM behaviours and security weaknesses |
+| Explainability | [LIME](https://github.com/marcotcr/lime) | Local explanations for individual predictions |
+| Explainability | [InterpretML](https://github.com/interpretml/interpret) | Global and local model interpretability |
+| Performance | [Apache JMeter](https://jmeter.apache.org/) | Repeatable load and response-time tests against configured endpoints |
+| Performance | [Locust](https://locust.io/) | Programmable user-load and throughput tests |
+| Monitoring | [Evidently](https://github.com/evidentlyai/evidently) | Data quality, drift and model-monitoring signals |
+| AI testing | [Giskard](https://github.com/Giskard-AI/giskard) | Selected model and LLM application quality/security tests |
+| Incident response | [Splunk](https://www.splunk.com/) | Security-event ingestion, searches, dashboards and alert workflows |
+| Incident response | [Elastic Security](https://github.com/elastic/kibana) | Security-event ingestion, detection rules, investigation and response workflows |
+
+The tools are not interchangeable and do not cover every model or interface. Suitability depends on model type, access method, data, deployment architecture, licensing, and assessment objective. Use official upstream documentation to confirm current features and compatibility before configuring a test.
 
 ## Repository structure
 
@@ -31,32 +43,39 @@ Tool selection and APIs change over time. Before implementation, verify the offi
 ├── docs/
 │   ├── IMPLEMENTATION_ROADMAP.md
 │   ├── EXECUTION_AND_EVIDENCE_STANDARD.md
-│   └── SAFETY.md
-├── common/
-│   └── result_schema.json
+│   ├── SAFETY.md
+│   └── TOOL_INTEGRATION_METHOD.md
+├── common/result_schema.json
 ├── templates/
 │   ├── TOOL_README_TEMPLATE.md
 │   ├── TEST_CASE_TEMPLATE.md
 │   └── FINDING_TEMPLATE.md
 ├── privacy/presidio/
+│   ├── README.md
+│   ├── requirements.txt
+│   ├── sample_cases.json
+│   ├── run_presidio.py
+│   └── sample_report.html
 ├── fairness/aif360/
 ├── robustness/textattack/
 ├── llm_security/garak/
-├── explainability/lime/
-├── explainability/interpretml/
-├── performance/jmeter/
-├── performance/locust/
-├── monitoring/evidently/
-├── monitoring/giskard/
+├── explainability/{lime,interpretml}/
+├── performance/{jmeter,locust}/
+├── monitoring/{evidently,giskard}/
 └── incident_response/{splunk,elastic}/
 ```
 
-Each tool directory will receive its own README, dependency pins, runnable sample, synthetic fixtures, logs and report artefacts as that workstream is implemented. Empty directories are represented by `.gitkeep` files in this starter archive.
+Each tool workstream should include, as appropriate: capability overview, method, prerequisites, configurable inputs, example test cases, expected evidence, limitations, official references, and an illustrative report. A runnable reference script is optional and should never be confused with proof that a test was run.
 
 ## Relationship to the main framework
 
-The main framework defines assurance areas, assessment methodology, risk classification and reporting expectations. This companion repository demonstrates selected tools in isolation. The IBM ART experiments remain in the existing AI-Testing-Framework repository and are not duplicated here.
+The main [AI Testing Framework](https://github.com/Gajanan108/AI-Testing-Framework) defines the assessment lifecycle, assurance areas, methodology, risk rating, finding taxonomy, and reporting expectations. This repository explains how selected external tools can support those workstreams. The IBM ART experiments remain in the main repository.
 
-## Status
+## Status and evidence discipline
 
-**Starter structure and templates only.** No tool integrations or test executions are claimed by this archive. Implementations should be added and validated incrementally.
+- Tool catalogue and starter structure: documented.
+- Presidio: reference method, configuration example, optional script and illustrative report.
+- Other tools: workstreams are planned for incremental documentation.
+- No actual assessment execution or tool result is claimed by the presence of sample files.
+
+Keep **execution status** separate from **finding status**. A planned or illustrative test is not an executed test; a tool observation is not automatically a confirmed vulnerability.

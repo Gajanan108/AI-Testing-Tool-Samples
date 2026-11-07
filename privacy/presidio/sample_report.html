@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Presidio — Illustrative Sample Report</title>
+<style>
+:root{color-scheme:light;--ink:#172033;--muted:#657187;--line:#dce2eb;--panel:#f4f6fa}
+*{box-sizing:border-box}body{margin:0;padding:28px;background:#eef1f6;color:var(--ink);font:14px/1.55 system-ui,-apple-system,Segoe UI,sans-serif}
+main{max-width:1120px;margin:auto;padding:30px;background:#fff;border:1px solid var(--line);border-radius:14px}
+.notice{padding:12px 15px;background:#fff4dc;border:1px solid #e7c77d;border-radius:8px;font-weight:700;letter-spacing:.03em}
+h1{margin:20px 0 4px;font-size:27px}.muted{color:var(--muted)}.meta,.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin:18px 0}
+.card{padding:14px;border:1px solid var(--line);border-radius:9px;background:#fff}.card strong{display:block;font-size:20px}
+section{margin-top:26px}h2{font-size:18px}table{width:100%;border-collapse:collapse}th,td{padding:10px;text-align:left;vertical-align:top;border-bottom:1px solid var(--line)}th{background:var(--panel)}code{background:var(--panel);padding:2px 4px;border-radius:4px}
+footer{margin-top:26px;border-top:1px solid var(--line);padding-top:14px;color:var(--muted);font-size:12px}
+@media(max-width:650px){body{padding:8px}main{padding:16px}}
+</style>
+</head>
+<body><main>
+<div class="notice">ILLUSTRATIVE EXAMPLE — NOT AN EXECUTED ASSESSMENT</div>
+<h1>Privacy / PII Detection — Sample Report</h1>
+<p class="muted">Example report structure for a Presidio-based assessment. All values below are fictional placeholders and must be replaced with evidence from the assessor's own environment.</p>
+<div class="meta">
+<div class="card"><span class="muted">Tool</span><strong>Microsoft Presidio</strong></div>
+<div class="card"><span class="muted">Target</span><strong>[Your model / system]</strong></div>
+<div class="card"><span class="muted">Version</span><strong>[Configured version]</strong></div>
+<div class="card"><span class="muted">Assessment date</span><strong>[YYYY-MM-DD]</strong></div>
+</div>
+<div class="grid">
+<div class="card"><span class="muted">Illustrative fixtures</span><strong>12</strong></div>
+<div class="card"><span class="muted">Illustrative expected entities</span><strong>18</strong></div>
+<div class="card"><span class="muted">Illustrative detected entities</span><strong>16</strong></div>
+<div class="card"><span class="muted">Illustrative missed entities</span><strong>2</strong></div>
+</div>
+<section><h2>1. Assessment objective</h2>
+<p>Determine whether configured PII recognizers identify the entity types in selected text surfaces and whether the configured anonymization policy transforms detected spans as expected.</p></section>
+<section><h2>2. Configuration summary</h2>
+<table><tbody>
+<tr><th>Input surface</th><td>[Prompt / response / retrieved text / log / other]</td></tr>
+<tr><th>Language and NLP model</th><td>[Configured language and model]</td></tr>
+<tr><th>Entity types</th><td>[PERSON, EMAIL_ADDRESS, PHONE_NUMBER, custom types]</td></tr>
+<tr><th>Recognizer configuration</th><td>[Built-in recognizers and custom recognizers]</td></tr>
+<tr><th>Anonymization policy</th><td>[Replace / redact / hash / other supported operator]</td></tr>
+<tr><th>Fixture source</th><td>[Synthetic or authorised dataset reference]</td></tr>
+</tbody></table></section>
+<section><h2>3. Illustrative observations</h2>
+<table><thead><tr><th>Test ID</th><th>Expected behaviour</th><th>Example observation</th><th>Interpretation</th></tr></thead>
+<tbody>
+<tr><td>PRIV-001</td><td>Detect synthetic email address</td><td>EMAIL_ADDRESS returned</td><td>Observation — expected type detected</td></tr>
+<tr><td>PRIV-002</td><td>Detect synthetic phone number</td><td>No PHONE_NUMBER returned</td><td>Potential gap — investigate format and recognizer configuration</td></tr>
+<tr><td>PRIV-003</td><td>Anonymize detected entity</td><td>Detected span replaced by configured operator</td><td>Observation — inspect remaining text and adjacent context</td></tr>
+</tbody></table>
+<p class="muted">The rows above are illustrative examples, not real tool output or measured results.</p></section>
+<section><h2>4. Example finding record</h2>
+<table><tbody>
+<tr><th>Finding ID</th><td>[PRIV-F-001]</td></tr>
+<tr><th>Category</th><td>Privacy / sensitive-data detection</td></tr>
+<tr><th>Execution status</th><td>PLANNED — example template; no execution is claimed</td></tr>
+<tr><th>Finding status</th><td>NONE — illustrative record only</td></tr>
+<tr><th>Risky behaviour</th><td>Unknown until tested in the target system</td></tr>
+<tr><th>Severity</th><td>UNASSESSED</td></tr>
+<tr><th>OWASP mapping</th><td>Not assigned; requires application-level evidence</td></tr>
+<tr><th>Evidence required</th><td>Sanitized input/output, recognizer configuration, tool version, logs and reproducible test case</td></tr>
+</tbody></table></section>
+<section><h2>5. Limitations and next steps</h2>
+<ul>
+<li>Replace the fictional counts and examples with actual measured outputs.</li>
+<li>Document supported entity types, language, custom recognizers and confidence thresholds.</li>
+<li>Review false negatives and false positives manually.</li>
+<li>Assess the complete data flow; a detector result alone does not establish application impact.</li>
+<li>Record the actual run status and preserve logs without exposing sensitive values.</li>
+</ul></section>
+<footer>Template purpose: show users what a Presidio assessment report could contain. This file is static and illustrative; it was not produced by running Presidio.</footer>
+</main></body></html>
