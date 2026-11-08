@@ -200,6 +200,11 @@ def main() -> int:
         help="Path to the JSON fixture file (default: sample_cases.json).",
     )
     parser.add_argument(
+        "--emit-evidence-summary",
+        action="store_true",
+        help="Emit a redacted machine-readable fixture summary to stdout (does not create another file).",
+    )
+    parser.add_argument(
         "--output-dir",
         type=Path,
         default=HERE / "output",
@@ -294,6 +299,28 @@ def main() -> int:
     print(f"Execution status: {execution_status}")
     print(f"HTML report: {report_path}")
     print(f"Execution log: {log_path}")
+    if args.emit_evidence_summary:
+        summary = {
+            "execution_status": execution_status,
+            "tool_version": analyzer_version,
+            "generated_at": timestamp,
+            "tests": [
+                {
+                    "test_id": row["case_id"],
+                    "test_name": row["description"],
+                    "expected_entities": row["expected"],
+                    "detected_entities": row["detected"],
+                    "missed_entities": row["missed"],
+                    "unexpected_entities": row["unexpected"],
+                    "scores": [
+                        {"entity_type": item["entity_type"], "score": item["score"]}
+                        for item in row["details"]
+                    ],
+                }
+                for row in rows
+            ],
+        }
+        print("PRESIDIO_EVIDENCE_SUMMARY=" + json.dumps(summary, sort_keys=True))
     return 0 if execution_status == "EXECUTED" else 1
 
 
