@@ -101,3 +101,8 @@ The main [AI Testing Framework](https://github.com/Gajanan108/AI-Testing-Framewo
 - No actual assessment execution or tool result is claimed by the presence of sample files.
 
 Keep **execution status** separate from **finding status**. A planned or illustrative test is not an executed test; a tool observation is not automatically a confirmed vulnerability.
+
+
+## OWASP taxonomy mapping
+
+For evidence-led mapping from assessment observations to OWASP categories, use the main framework's [OWASP mapping guide](https://github.com/Gajanan108/AI-Testing-Framework/blob/main/docs/OWASP_MAPPING_GUIDE.md). It covers the OWASP GenAI LLM Top 10 2026 release and the OWASP Machine Learning Security Top 10 2023 draft, with model-archetype boundaries and rules against forcing mappings. OWASP labels do not determine finding status or severity.
