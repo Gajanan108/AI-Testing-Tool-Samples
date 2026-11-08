@@ -46,6 +46,16 @@ Use the official Presidio documentation to confirm the current API and supported
 - `sample_report.html`: **illustrative only** report layout with fictional values. It is not generated from an actual execution.
 - `run_presidio.py`: optional reference script; its presence does not mean it has been executed or validated in your environment.
 
+### Machine-readable orchestration output
+
+The runner also supports an opt-in, redacted evidence summary on stdout:
+
+```bash
+python run_presidio.py --fixtures sample_cases.json --output-dir ./output --emit-evidence-summary
+```
+
+The summary is emitted as one `PRESIDIO_EVIDENCE_SUMMARY=` JSON line. It contains fixture IDs, expected/detected entity types, misses, unexpected types and confidence scores; it does not include input text, detected values or anonymized text. It creates no additional file, so the runner continues to write only `presidio_report.html` and `presidio_run.log`. The framework orchestrator consumes this line to create its separate normalized evidence record and SHA-256 artifact references.
+
 ## Report interpretation
 
 A missed expected entity is a test observation that may indicate a potential privacy-control weakness. An unexpected detection may be a false-positive candidate. Neither should be promoted to a confirmed finding without review of the actual data surface, application behaviour and impact.
